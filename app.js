@@ -65,13 +65,11 @@ async function saveHistory(date, dayOfWeek) {
     [new Date(), date, date, dayOfWeek]
   );
 
-  connection.end();
+  
 }
 
 async function getHistory() {
   const [rows] = await connection.execute("SELECT * FROM historique");
-
-  connection.end();
 
   return rows.map((row) => ({
     id: row.id,
