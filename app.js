@@ -20,7 +20,7 @@ app.post("/dayfinder", async (req, res) => {
   try {
     const formattedDate = formatDate(date);
     const dayOfWeek = getDayOfWeek(date);
-    await saveToHistory(formattedDate, dayOfWeek);
+    await saveHistory(formattedDate, dayOfWeek);
 
     res.json({
       date: formattedDate,
@@ -59,7 +59,7 @@ function getDayOfWeek(date) {
   return dayOfWeek;
 }
 
-async function saveToHistory(date, dayOfWeek) {
+async function saveHistory(date, dayOfWeek) {
   await connection.execute(
     "INSERT INTO historique (searchDate, request, responseDate, responseDay) VALUES (?, ?, ?, ?)",
     [new Date(), date, date, dayOfWeek]
